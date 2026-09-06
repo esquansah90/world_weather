@@ -59,16 +59,17 @@ The cleaned dataset is saved as `weather_clean.csv`.
 
 ## SQLite Database
 
-The cleaned weather data is stored in a SQLite database named
+The raw and cleaned weather data are stored in a SQLite database named
 `weather.db`.
 
 The `weather_database.py` script:
 
 - Connects to the SQLite database
-- Loads `weather_clean.csv` using Pandas
+- Loads `weather_raw.csv` and `weather_clean.csv` using Pandas
+- Stores the raw data in a table named `weather_raw`
 - Stores the cleaned data in a table named `weather`
-- Checks that the `weather` table was created
-- Queries the database to verify that weather records were stored correctly
+- Checks that both tables were created
+- Queries both tables to verify that the weather records were stored correctly
 
 The SQLite table contains:
 
@@ -111,9 +112,3 @@ Completed:
 - SQLite database creation
 - Loading cleaned data into SQLite
 - Database verification using SQL queries
-
-Next step:
-
-- Continue analyzing the weather data
-- Create visualizations
-- Build the interactive Streamlit dashboard
