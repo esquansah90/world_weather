@@ -1,92 +1,12 @@
-# World Weather Web Scraping Capstone
+# World Weather Web Scraping and Dashboard Project
 
 ## Project Overview
 
-This project is a data pipeline that collects current weather information
-from the Weather Around the World website.
+This project collects weather data for cities around the world, cleans and transforms the collected data, stores the cleaned data in a SQLite database, and presents the results through an interactive Streamlit dashboard.
 
-The project uses Selenium to scrape weather data from the website, Pandas
-to clean and transform the collected data, and SQLite to store the cleaned
-data in a database.
+The project demonstrates a complete data pipeline:
 
-The final goal of the project is to create an interactive Streamlit
-dashboard that allows users to explore weather conditions and temperatures
-for cities around the world.
-
-## Data Collected
-
-The scraped dataset contains weather information for approximately 140
-cities around the world.
-
-The dataset includes:
-
-- City
-- Local Time
-- Weather Condition
-- Temperature
-
-## Project Workflow
-
-The project follows this data pipeline:
-
-1. Scrape current weather data from the website using Selenium.
-2. Store the original scraped data in `weather_raw.csv`.
-3. Load the raw CSV data into Pandas.
-4. Inspect the data for missing values and duplicate records.
-5. Clean and transform the weather data.
-6. Save the cleaned data to `weather_clean.csv`.
-7. Load the cleaned data into a SQLite database.
-8. Query the SQLite database to verify that the data was stored correctly.
-9. Use the cleaned weather data for analysis and visualization.
-10. Create an interactive Streamlit dashboard.
-
-## Data Cleaning
-
-The raw weather data is cleaned using Pandas.
-
-The cleaning process includes:
-
-- Checking the structure and data types of the dataset
-- Checking for missing values
-- Checking for duplicate rows
-- Removing duplicate records
-- Removing the `°F` symbol and extra spaces from temperature values
-- Converting temperature values from strings to numeric values
-- Renaming the `Temperature` column to `Temperature_F`
-- Rechecking the cleaned dataset for missing values
-
-The cleaned dataset is saved as `weather_clean.csv`.
-
-## SQLite Database
-
-The raw and cleaned weather data are stored in a SQLite database named
-`weather.db`.
-
-The `weather_database.py` script:
-
-- Connects to the SQLite database
-- Loads `weather_raw.csv` and `weather_clean.csv` using Pandas
-- Stores the raw data in a table named `weather_raw`
-- Stores the cleaned data in a table named `weather`
-- Checks that both tables were created
-- Queries both tables to verify that the weather records were stored correctly
-
-The SQLite table contains:
-
-- City
-- Local Time
-- Condition
-- Temperature_F
-
-## Files
-
-- `scrape_weather.py` - Scrapes current weather data from the website using Selenium
-- `clean_weather.py` - Cleans and transforms the raw weather data using Pandas
-- `weather_database.py` - Loads the cleaned weather data into SQLite and verifies the stored records
-- `weather_raw.csv` - Original data collected by the web scraper
-- `weather_clean.csv` - Cleaned and transformed weather data
-- `weather.db` - SQLite database containing the cleaned weather data
-- `README.md` - Documentation for the project
+**Web Scraping → CSV → Data Cleaning → SQLite Database → Streamlit Dashboard**
 
 ## Technologies Used
 
@@ -94,21 +14,88 @@ The SQLite table contains:
 - Selenium
 - Pandas
 - SQLite
-- Git
-- GitHub
-- Streamlit (planned for the dashboard)
+- Streamlit
+- Plotly
+- Git and GitHub
 
-## Current Progress
+## Project Files
 
-Completed:
+- `scrape_weather.py` - Scrapes weather information from the web using Selenium.
+- `weather_raw.csv` - Stores the raw scraped weather data.
+- `clean_weather.py` - Cleans and transforms the raw weather data using Pandas.
+- `weather_clean.csv` - Stores the cleaned version of the weather data.
+- `weather_database.py` - Loads the cleaned weather data into SQLite.
+- `weather.db` - SQLite database containing the cleaned weather information.
+- `streamlit_app.py` - Creates the interactive World Weather Dashboard.
+- `requirements.txt` - Lists the Python packages required to run the project.
+- `service_urls.txt` - Contains the public URL for the deployed Streamlit dashboard.
 
-- Web scraping with Selenium
-- Collection of weather data for approximately 140 cities
-- Raw CSV creation
-- Data inspection with Pandas
-- Missing-value and duplicate checks
-- Data cleaning and transformation
-- Cleaned CSV creation
-- SQLite database creation
-- Loading cleaned data into SQLite
-- Database verification using SQL queries
+## Web Scraping
+
+Weather data is collected using Selenium.
+
+The scraping process gathers weather information for cities around the world and stores the original results in:
+
+`weather_raw.csv`
+
+The scraper is designed to collect the required information without making unnecessary duplicate requests.
+
+## Data Cleaning and Transformation
+
+The raw weather data is loaded into a Pandas DataFrame for cleaning and transformation.
+
+The cleaning process handles issues such as:
+
+- Missing values
+- Duplicate records
+- Malformed or inconsistent values
+- Data type conversions
+- Unnecessary or unusable data
+
+The project keeps both the raw and cleaned datasets so the before-and-after stages of the data can be compared.
+
+The cleaned dataset is saved as:
+
+`weather_clean.csv`
+
+## SQLite Database
+
+After cleaning, the transformed weather data is loaded into a SQLite database.
+
+Database file:
+
+`weather.db`
+
+The Streamlit dashboard reads the weather information from this database.
+
+## World Weather Dashboard
+
+The project includes an interactive dashboard built with Streamlit.
+
+The dashboard allows users to explore weather information for cities around the world.
+
+### Dashboard Features
+
+- Displays weather data in an interactive table
+- Shows key weather metrics
+- Includes at least three data visualizations
+- Provides a temperature range slider
+- Provides a city selection dropdown
+- Updates dashboard information based on user selections
+- Uses Plotly for interactive visualizations
+- Provides titles and descriptions to help users understand the data
+
+### Screenshots
+
+![Weather Data](image.png)
+![Temperature by City](image-1.png)
+![Temperature Distribution](image-2.png)
+![Weather Condition Frequency](image-3.png)
+
+## Running the Dashboard Locally
+
+1. Create a virtual environment:
+
+```bash
+python -m venv .venv
+```
